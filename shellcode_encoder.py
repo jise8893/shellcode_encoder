@@ -7,7 +7,7 @@ def xor(data):
     leng=len(key)
     reverse=""
     for i in range(0,len(data)):
-       reverse+=str(hex((ord(data[i])^ord(key[i%leng])))) #B is unsigned character  ord = ascii code number
+       reverse+=str(hex((ord(data[i])^ord(key[i%leng])))).replace('0x','\\x') #B is unsigned character  ord = ascii code number
     return reverse
 
 def conv_hex(data):
@@ -54,4 +54,4 @@ decoder=(
 xor_shellcode =xor(org_shellcode)
 print(len(org_shellcode))
 print("Original shellcode:\n "+conv_hex(org_shellcode)+"\n")
-print("Encoded shellcode:\n"+conv_hex(decoder)+conv_hex(xor_shellcode))
+print("Encoded shellcode:\n"+conv_hex(decoder)+xor_shellcode)
